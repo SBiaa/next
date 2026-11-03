@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-const ROLES = ["Head criativa", "Comercial", "Filmmaking", "Edição", "Criador / YouTube", "[FUNÇÃO]"];
+const MEMBERS = [
+  { name: "Bia Siqueira", role: "Head criativa" },
+  { name: "Deka", role: "Comercial" },
+  { name: "Peterson", role: "Filmmaking" },
+  { name: "[NOME]", role: "Edição" },
+  { name: "[NOME]", role: "Criador / YouTube" },
+  { name: "Miguel", role: "Financeiro" },
+];
 
 export function Team() {
   const [active, setActive] = useState(0);
@@ -10,7 +17,7 @@ export function Team() {
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(() => setActive((a) => (a + 1) % ROLES.length), 2500);
+    const timer = setInterval(() => setActive((a) => (a + 1) % MEMBERS.length), 2500);
     return () => clearInterval(timer);
   }, [paused]);
 
@@ -20,12 +27,12 @@ export function Team() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {ROLES.map((role, i) => (
+      {MEMBERS.map(({ name, role }, i) => (
         <button
           key={role}
           type="button"
           className={`member${i === active ? " active" : ""}`}
-          aria-label={`Ver ${role}`}
+          aria-label={`Ver ${name === "[NOME]" ? role : `${name}, ${role}`}`}
           aria-pressed={i === active}
           onClick={() => setActive(i)}
           onFocus={() => setActive(i)}
@@ -34,7 +41,7 @@ export function Team() {
             <span className="placeholder-text">[FOTO]</span>
           </div>
           <div>
-            <p className="member-name">[NOME]</p>
+            <p className="member-name">{name}</p>
             <p className="member-role">{role}</p>
           </div>
         </button>
