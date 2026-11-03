@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const MEMBERS = [
   { name: "Bia Siqueira", role: "Head criativa" },
   { name: "Deka", role: "Comercial" },
-  { name: "Peterson", role: "Filmmaking" },
+  { name: "Peterson", role: "Filmmaker" },
   { name: "[NOME]", role: "Edição" },
   { name: "[NOME]", role: "Criador / YouTube" },
   { name: "Miguel", role: "Financeiro" },
