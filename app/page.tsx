@@ -285,8 +285,7 @@ export default function Home() {
           <div className="wrap">
             <h2>Qual é o próximo nível do seu negócio?</h2>
             <p className="contact-lead">Conta o objetivo. A ideia e a execução são com a gente.</p>
-            {/* TODO: trocar pelo link do WhatsApp quando tiver o número */}
-            <a href="#topo" className="btn">
+            <a href="/cadastro" className="btn">
               Quero fazer acontecer
             </a>
           </div>

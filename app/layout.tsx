@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import { Tracker } from "@/components/Tracker";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={outfit.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Tracker />
+      </body>
     </html>
   );
 }

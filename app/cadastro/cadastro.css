@@ -1,0 +1,87 @@
+.cad { min-height: 100vh; display: flex; flex-direction: column; }
+.cad-header {
+  max-width: 760px; width: 100%; margin: 0 auto; padding: 28px 16px 8px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+}
+.cad-header p { font-size: 14px; color: var(--dim); }
+.cad-main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 16px 16px 80px; }
+
+.wiz-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+  padding: clamp(24px, 5vw, 48px);
+}
+.wiz-card h1 {
+  font-size: clamp(30px, 5vw, 46px); line-height: 1.05; font-weight: 900; letter-spacing: -1.5px;
+  outline: none;
+}
+.wiz-sub { margin-top: 12px; font-size: 18px; color: var(--muted); }
+
+.wiz-progress { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; font-size: 14px; color: var(--dim); }
+.wiz-progress span { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wiz-bar { flex: 1; height: 6px; border-radius: 99px; background: var(--card-2); overflow: hidden; }
+.wiz-bar div { height: 100%; background: var(--orange); border-radius: 99px; transition: width 300ms ease; }
+
+.wiz-fields { margin-top: 32px; display: flex; flex-direction: column; gap: 24px; }
+.wiz-field { display: flex; flex-direction: column; gap: 10px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.wiz-label { font-size: 16px; font-weight: 600; padding: 0; }
+.wiz-label em { font-style: normal; font-weight: 400; color: var(--dim); font-size: 14px; margin-left: 6px; }
+
+.wiz-card input:not([type="checkbox"]), .wiz-card textarea {
+  width: 100%; font: inherit; font-size: 18px; color: var(--text);
+  background: var(--bg); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px;
+  transition: border-color 150ms ease;
+}
+.wiz-card textarea { resize: vertical; min-height: 120px; }
+.wiz-card input::placeholder, .wiz-card textarea::placeholder { color: #5f5b55; }
+.wiz-card input:focus, .wiz-card textarea:focus { outline: none; border-color: var(--orange); }
+.wiz-card .wiz-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.wiz-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.wiz-chips button {
+  font: inherit; font-size: 16px; color: var(--text); background: var(--bg);
+  border: 2px solid var(--line); border-radius: 999px; padding: 10px 18px; cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+}
+.wiz-chips button:hover { border-color: var(--orange-2); }
+.wiz-chips button.on { background: var(--orange); border-color: var(--orange); color: var(--bg); font-weight: 600; }
+
+.wiz-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.wiz-product {
+  position: relative;
+  display: flex; align-items: center; gap: 14px; cursor: pointer;
+  background: var(--bg); border: 2px solid var(--line); border-radius: 16px; padding: 16px 18px;
+  font-size: 17px; line-height: 1.3; transition: border-color 150ms ease;
+}
+.wiz-product:hover { border-color: var(--orange-2); }
+.wiz-product.on { border-color: var(--orange); }
+.wiz-product input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.wiz-product:has(input:focus-visible) { outline: 2px solid var(--orange-3); outline-offset: 2px; }
+.wiz-product .box {
+  flex: none; width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--dim);
+  display: grid; place-items: center; font-size: 14px; font-weight: 900; color: var(--bg);
+}
+.wiz-product.on .box { background: var(--orange); border-color: var(--orange); }
+
+.wiz-yesno { display: flex; flex-direction: column; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.wiz-yesno:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.wiz-error { margin-top: 24px; color: #ff8a7a; font-size: 15px; }
+
+.wiz-actions {
+  margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+}
+.wiz-actions-right { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-left: auto; }
+.wiz-actions button { font: inherit; cursor: pointer; }
+.wiz-actions button:disabled { opacity: 0.6; cursor: default; }
+.wiz-link, .wiz-skip { background: none; border: 0; color: var(--muted); font-size: 16px; padding: 12px 8px; }
+.wiz-link:hover, .wiz-skip:hover { color: var(--text); }
+.wiz-skip { text-decoration: underline; text-underline-offset: 4px; }
+.wiz-next { border: 0; padding: 16px 32px; font-size: 18px; }
+
+.wiz-done { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; padding-block: 64px; }
+.wiz-done p { max-width: 520px; font-size: 19px; line-height: 1.5; color: var(--muted); }
+.wiz-done .btn { padding: 16px 32px; font-size: 18px; margin-top: 8px; }
+.wiz-check {
+  width: 72px; height: 72px; border-radius: 999px; background: var(--orange); color: var(--bg);
+  display: grid; place-items: center; font-size: 36px; font-weight: 900;
+}
