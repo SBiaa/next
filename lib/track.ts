@@ -65,4 +65,9 @@ export function send(payload: Record<string, unknown>) {
 
 export function trackEvent(name: string, props: Record<string, unknown> = {}) {
   send({ type: "event", name, props });
+  // Também manda pro Google Tag Manager (que repassa pro Google Analytics).
+  try {
+    const w = window as unknown as { dataLayer?: unknown[] };
+    (w.dataLayer ??= []).push({ event: name, ...props });
+  } catch {}
 }
