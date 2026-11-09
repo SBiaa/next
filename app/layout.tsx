@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
-import { GoogleTagManager } from "@/components/GoogleTagManager";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <Tracker />
-        <GoogleTagManager />
+        <GoogleAnalytics />
       </body>
     </html>
   );
