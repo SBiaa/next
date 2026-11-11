@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { Logo } from "@/components/Logo";
+import { Photo } from "@/components/Photo";
 import { RecTimer } from "@/components/RecTimer";
 import { Team } from "@/components/Team";
 import {
@@ -15,6 +16,11 @@ import {
   TagIcon,
   VideoIcon,
 } from "@/components/Icons";
+
+// Contatos do rodapé — preencha aqui.
+const WHATSAPP = "[WHATSAPP]";
+const INSTAGRAM = "[@INSTAGRAM]";
+const EMAIL = "[E-MAIL]";
 
 const MARQUEE = "Vídeo ▸ Campanha ▸ Design ▸ Tecnologia ▸ Conteúdo ▸ ";
 
@@ -48,35 +54,39 @@ const STEPS = [
 const SERVICES = [
   {
     Icon: VideoIcon,
-    photo: "[FOTO: câmera gravando produto]",
+    photo: "servico-video.jpg",
+    alt: "Câmera gravando um produto em cima do balcão de uma loja",
     title: "Vídeo e conteúdo",
     text: "Gravação no seu espaço, edição, Reels, TikTok, YouTube.",
   },
   {
     Icon: MegaphoneIcon,
-    photo: "[FOTO: vitrine de promoção / data comemorativa]",
+    photo: "servico-campanhas.jpg",
+    alt: "Vitrine de loja decorada para uma promoção de data comemorativa",
     title: "Campanhas",
     text: "Datas comemorativas, lançamentos, promoções que fazem barulho.",
   },
   {
     Icon: PenIcon,
-    photo: "[IMAGEM: mockup de identidade visual]",
+    photo: "servico-design.jpg",
+    alt: "Materiais de identidade visual de uma marca: logo, cartão e panfleto",
     title: "Design e identidade",
     text: "Logo, materiais, panfletos, cartão — tudo com cara de marca grande.",
   },
   {
     Icon: CodeIcon,
-    photo: "[IMAGEM: tela de sistema no celular]",
+    photo: "servico-tecnologia.jpg",
+    alt: "Mão segurando um celular com a tela de um sistema de atendimento",
     title: "Tecnologia",
     text: "Ferramentas e soluções que economizam seu tempo e trazem mais cliente.",
   },
 ];
 
 const SHOTS = [
-  "[FOTO: filmmaker com câmera no ombro]",
-  "[FOTO: set montado no comércio, luz e tripé]",
-  "[FOTO: criador gravando com celular]",
-  "[FOTO: edição na ilha / timeline na tela]",
+  { file: "bastidores-1.jpg", alt: "Filmmaker gravando com a câmera no ombro" },
+  { file: "bastidores-2.jpg", alt: "Set de gravação montado dentro de um comércio, com luz e tripé" },
+  { file: "bastidores-3.jpg", alt: "Criador de conteúdo gravando um vídeo com o celular" },
+  { file: "bastidores-4.jpg", alt: "Vídeo sendo editado, com a linha do tempo aberta na tela" },
 ];
 
 const IDEAS = [
@@ -130,14 +140,18 @@ export default function Home() {
 
           <div className="hero-visual">
             <div className="viewfinder">
+              <Photo
+                file="hero-gravacao-loja.jpg"
+                alt="Equipe da Next gravando dentro de uma loja, com câmera, luz e o cliente no quadro"
+                sizes="(max-width: 960px) 100vw, 480px"
+                mark="center"
+                priority
+              />
               <div className="corner tl" />
               <div className="corner tr" />
               <div className="corner bl" />
               <div className="corner br" />
               <RecTimer />
-              <p className="placeholder-text">
-                [FOTO: equipe gravando dentro de uma loja — câmera, luz, cliente no quadro]
-              </p>
             </div>
             <div className="badge">
               <Logo width={30} height={35} variant="dark" />
@@ -173,8 +187,12 @@ export default function Home() {
             </p>
           </div>
           <div className="photo-square">
-            <StoreIcon size={40} color="#8F8A82" strokeWidth={1.6} />
-            <p className="placeholder-text">[FOTO: dono de comércio na correria do balcão]</p>
+            <Photo
+              file="problema-balcao.jpg"
+              alt="Dono de comércio atendendo no balcão em um momento de movimento"
+              sizes="(max-width: 960px) 100vw, 480px"
+              mark="bl"
+            />
           </div>
         </section>
 
@@ -205,10 +223,15 @@ export default function Home() {
           <p className="eyebrow">O que a gente faz</p>
           <h2 className="h2">Tudo que o seu comércio precisa pra ser visto.</h2>
           <div className="service-grid">
-            {SERVICES.map(({ Icon, photo, title, text }) => (
+            {SERVICES.map(({ Icon, photo, alt, title, text }) => (
               <div key={title} className="service">
                 <div className="service-photo">
-                  <p className="placeholder-text">{photo}</p>
+                  <Photo
+                    file={photo}
+                    alt={alt}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1240px) 50vw, 300px"
+                    mark="br"
+                  />
                 </div>
                 <div className="service-body">
                   <div className="service-icon">
@@ -235,9 +258,14 @@ export default function Home() {
               </div>
             </div>
             <div className="shots">
-              {SHOTS.map((label, i) => (
-                <div key={label} className={`shot${i % 2 ? " offset" : ""}`}>
-                  <p className="placeholder-text">{label}</p>
+              {SHOTS.map(({ file, alt }, i) => (
+                <div key={file} className={`shot${i % 2 ? " offset" : ""}`}>
+                  <Photo
+                    file={file}
+                    alt={alt}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1240px) 50vw, 300px"
+                    mark={i % 2 ? "tr" : "bl"}
+                  />
                 </div>
               ))}
             </div>
@@ -294,7 +322,9 @@ export default function Home() {
 
       <footer className="footer">
         <span>next — Marketing, conteúdo e tecnologia para o seu próximo nível.</span>
-        <span>[WHATSAPP] · [@INSTAGRAM] · [E-MAIL]</span>
+        <span>
+          {WHATSAPP} · {INSTAGRAM} · {EMAIL}
+        </span>
       </footer>
     </>
   );

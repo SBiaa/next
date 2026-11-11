@@ -38,7 +38,7 @@ export function Team() {
           onFocus={() => setActive(i)}
         >
           <div className="member-photo">
-            <span className="placeholder-text">[FOTO]</span>
+            <span className="member-initial" aria-hidden="true">{(name === "[NOME]" ? role : name).charAt(0)}</span>
           </div>
           <div>
             <p className="member-name">{name}</p>

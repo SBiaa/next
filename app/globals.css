@@ -52,12 +52,22 @@ h1, h2, h3, p { margin: 0; }
 
 .accent { color: var(--orange); }
 
-.placeholder-text {
-  font-size: 13px;
-  letter-spacing: 1px;
-  color: var(--dim);
-  text-align: center;
-}
+/* Photos (components/Photo.tsx) */
+.photo-img { object-fit: cover; filter: grayscale(1) contrast(1.15); }
+/* Enquanto a foto não existe: bloco escuro do próprio espaço + bloco laranja chapado */
+.photo-fallback { position: absolute; inset: 0; container-type: size; }
+.photo-fallback::before,
+.photo-fallback::after { content: ""; position: absolute; background: var(--orange); }
+.photo-fallback::after { width: 34cqmin; height: 34cqmin; }
+.photo-fallback::before { width: 16cqmin; height: 4px; }
+.mark-br::after { right: 0; bottom: 0; }
+.mark-br::before { left: 24px; top: 28px; }
+.mark-bl::after { left: 0; bottom: 0; }
+.mark-bl::before { right: 24px; top: 28px; }
+.mark-tr::after { right: 0; top: 0; }
+.mark-tr::before { left: 24px; bottom: 28px; }
+.mark-center::after { left: 50%; top: 50%; width: 30cqmin; height: 30cqmin; transform: translate(-50%, -50%); }
+.mark-center::before { display: none; }
 
 /* Buttons */
 .btn {
@@ -146,7 +156,7 @@ h1, h2, h3, p { margin: 0; }
 }
 @keyframes blink { to { visibility: hidden; } }
 .viewfinder .rec { position: absolute; top: 30px; left: 72px; font-size: 14px; font-variant-numeric: tabular-nums; }
-.viewfinder .placeholder-text { padding: 0 48px; font-size: 15px; }
+.viewfinder .corner, .viewfinder .rec { z-index: 1; }
 
 .badge {
   position: absolute;
@@ -209,8 +219,9 @@ h1, h2, h3, p { margin: 0; }
   justify-content: center;
   gap: 16px;
   padding: 32px;
+  position: relative;
+  overflow: hidden;
 }
-.photo-square .placeholder-text { font-size: 15px; }
 
 /* How it works */
 .how { background: var(--surface); padding: 140px 0; }
@@ -250,6 +261,8 @@ h1, h2, h3, p { margin: 0; }
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 .service-body { padding: 32px; display: flex; flex-direction: column; gap: 14px; }
 .service-icon {
@@ -283,8 +296,9 @@ h1, h2, h3, p { margin: 0; }
   display: flex;
   align-items: flex-end;
   padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
-.shot .placeholder-text { text-align: left; }
 .shot.offset { margin-top: 48px; }
 
 /* Imagine */
@@ -325,19 +339,31 @@ h1, h2, h3, p { margin: 0; }
 }
 .member:focus-visible { outline: 2px solid var(--orange-2); outline-offset: 4px; border-radius: 20px; }
 .member-photo {
+  position: relative;
   aspect-ratio: 3 / 4;
   background: var(--card);
   border-radius: 20px;
-  border: 3px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 400ms ease;
+  overflow: hidden;
+  container-type: inline-size;
+  transition: background-color 400ms ease;
+}
+.member-initial {
+  position: absolute;
+  right: -0.12em;
+  bottom: -0.04em;
+  font-size: 90cqw;
+  font-weight: 900;
+  line-height: 0.72;
+  letter-spacing: -0.04em;
+  color: var(--line);
+  user-select: none;
+  transition: color 400ms ease;
 }
 .member-name { font-size: 20px; font-weight: 800; color: var(--text); }
 .member-role { margin-top: 4px; font-size: 15px; color: var(--muted); transition: color 400ms ease; }
 .member.active { opacity: 1; }
-.member.active .member-photo { border-color: var(--orange); }
+.member.active .member-photo { background: var(--orange); }
+.member.active .member-initial { color: var(--bg); }
 .member.active .member-role { color: var(--orange-2); }
 
 /* Contact */
@@ -383,6 +409,7 @@ h1, h2, h3, p { margin: 0; }
   .how, .imagine, .contact { padding: 96px 0; }
   .backstage { padding: 88px 0; }
   .shot.offset { margin-top: 0; }
+  .members { grid-template-columns: repeat(2, 1fr); }
   .step { padding: 32px; }
   .hero-visual { padding-left: 20px; }
 }
@@ -391,4 +418,5 @@ h1, h2, h3, p { margin: 0; }
   html { scroll-behavior: auto; }
   .marquee-track, .rec-dot { animation: none; }
   .btn, .service, .idea { transition: none; }
+  .member, .member-photo, .member-initial, .member-role { transition: none; }
 }
