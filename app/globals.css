@@ -395,6 +395,40 @@ h1, h2, h3, p { margin: 0; }
   color: var(--foot);
 }
 
+/* Animações de scroll */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange-3), var(--orange));
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Entrada ao rolar: o estado final é o estilo natural do elemento, então não
+   briga com hover/transition. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: var(--rx, 0) var(--ry, 40px);
+    scale: var(--rs, 1);
+  }
+}
+.rv:not(.in) { opacity: 0; }
+.rv.in { animation: rise 800ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) backwards; }
+.rv[data-rv="left"] { --rx: -48px; --ry: 0px; }
+.rv[data-rv="right"] { --rx: 48px; --ry: 0px; }
+.rv[data-rv="zoom"] { --rs: 0.92; --ry: 28px; }
+
+/* Entrada do hero ao carregar */
+.hero-copy > *, .hero-visual { animation: rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.hero-copy > :nth-child(2) { animation-delay: 120ms; }
+.hero-copy > :nth-child(3) { animation-delay: 240ms; }
+.hero-copy > :nth-child(4) { animation-delay: 360ms; }
+.hero-visual { animation-delay: 200ms; --rx: 48px; --ry: 0px; }
+
 @media (max-width: 640px) {
   .header { padding: 20px 16px; row-gap: 14px; }
   .nav { order: 3; width: 100%; gap: 24px; font-size: 15px; }
@@ -418,5 +452,6 @@ h1, h2, h3, p { margin: 0; }
   html { scroll-behavior: auto; }
   .marquee-track, .rec-dot { animation: none; }
   .btn, .service, .idea { transition: none; }
+  .hero-copy > *, .hero-visual { animation: none; }
   .member, .member-photo, .member-initial, .member-role { transition: none; }
 }

@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { Logo } from "@/components/Logo";
 import { Photo } from "@/components/Photo";
 import { RecTimer } from "@/components/RecTimer";
+import { ScrollEffects } from "@/components/ScrollEffects";
 import { Team } from "@/components/Team";
 import {
   BulbIcon,
@@ -99,6 +100,7 @@ const IDEAS = [
 export default function Home() {
   return (
     <>
+      <ScrollEffects />
       <header className="header">
         <a href="#topo" className="brand">
           <Logo label="Logo Next" />
